@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#102a43">
+  <meta name="description" content="CivicPulse helps residents report, verify and track local civic issues.">
+  <title>CivicPulse 2.0 | Report. Verify. Resolve.</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#dashboard">Skip to public reports</a>
+  <header class="topbar">
+    <a class="brand" href="#home" aria-label="CivicPulse home"><span class="brand-mark">CP</span><span><b>CivicPulse</b><small>REPORT · VERIFY · RESOLVE</small></span></a>
+    <nav class="nav-links" aria-label="Primary navigation"><a href="#dashboard" data-i18n="navDashboard">Dashboard</a><a href="#report" data-i18n="navReport">Report an issue</a><a href="#how" data-i18n="navHow">How it works</a></nav>
+    <div class="nav-actions"><button id="languageToggle" class="language-toggle" type="button" aria-pressed="false" aria-label="Switch core interface labels to Hindi">हिंदी</button><button id="roleToggle" class="btn btn-outline" type="button">Ward officer demo</button><button id="exportBtn" class="btn btn-dark" type="button">Export CSV</button></div>
+  </header>
+
+  <main id="home" class="shell">
+    <section class="hero">
+      <div class="hero-copy">
+        <span class="eyebrow"><span class="dot"></span> <span data-i18n="heroEyebrow">COMMUNITY-POWERED CIVIC ACTION</span></span>
+        <h1 data-i18n-html="heroTitle">Make your neighbourhood<br><em>impossible to ignore.</em></h1>
+        <p data-i18n="heroBody">Report potholes, overflowing waste, broken streetlights and other local issues. Neighbours help verify them. Ward teams can show what happens next.</p>
+        <div class="hero-actions"><a class="btn btn-primary" href="#report"><span data-i18n="heroCta">Report a civic issue</span> <span aria-hidden="true">↗</span></a><a class="text-link" href="#dashboard" data-i18n="heroExplore">Explore public reports ↓</a></div>
+        <div class="hero-note" data-i18n="heroNote">Designed for clear reporting, shared visibility and accountable follow-through.</div>
+        <div class="outcome-list" aria-label="CivicPulse value summary"><span><b>01</b><small data-i18n="outcomeOne">One public tracking ID</small></span><span><b>02</b><small data-i18n="outcomeTwo">Repeated reports stay together</small></span><span><b>03</b><small data-i18n="outcomeThree">Every update stays visible</small></span></div>
+      </div>
+      <div class="hero-visual">
+        <div class="visual-top"><span data-i18n="pulseLabel">LOCAL ISSUE PULSE</span><span class="live-label">● <span data-i18n="demoData">DEMO DATA</span></span></div>
+        <div class="visual-map" aria-label="Illustrative neighbourhood map with civic issue pins">
+          <div class="map-road road-a"></div><div class="map-road road-b"></div><div class="map-road road-c"></div>
+          <div class="map-block block-a"></div><div class="map-block block-b"></div><div class="map-block block-c"></div><div class="map-block block-d"></div>
+          <span class="map-pin pin-one">!</span><span class="map-pin pin-two">♻</span><span class="map-pin pin-three">!</span>
+          <div class="map-caption"><b>Neighbourhood watch</b><small>Illustrative issue map · not live GIS</small></div>
+        </div>
+        <div class="visual-footer"><div><b id="heroOpen">0</b><small data-i18n="openIssues">Open issues</small></div><div><b id="heroUrgent">0</b><small data-i18n="highCritical">High / critical</small></div><div><b id="heroResolved">0</b><small data-i18n="resolved">Resolved</small></div></div>
+      </div>
+    </section>
+
+    <section id="dashboard" class="section">
+      <div class="section-heading"><div><span class="eyebrow" data-i18n="accountability">PUBLIC ACCOUNTABILITY</span><h2 data-i18n="attentionTitle">What needs attention?</h2><p data-i18n="attentionBody">Reports are ranked by a transparent priority score, not hidden decision-making.</p></div><span class="demo-badge" data-i18n="sampleLocal">SAMPLE DATA · LOCAL DEMO</span></div>
+      <div class="metrics" aria-label="Issue metrics">
+        <article class="metric"><span class="metric-symbol blue">▤</span><small data-i18n="totalReports">Total reports</small><b id="totalCount">0</b></article>
+        <article class="metric"><span class="metric-symbol amber">◷</span><small data-i18n="awaitingAction">Awaiting action</small><b id="openCount">0</b></article>
+        <article class="metric"><span class="metric-symbol red">!</span><small data-i18n="highCritical">High / critical</small><b id="urgentCount">0</b></article>
+        <article class="metric"><span class="metric-symbol green">✓</span><small data-i18n="resolved">Resolved</small><b id="resolvedCount">0</b></article>
+      </div>
+      <section class="tracking-ribbon" aria-labelledby="trackTitle">
+        <div><span class="eyebrow" data-i18n="trackEyebrow">PUBLIC TRACKING</span><h3 id="trackTitle" data-i18n="trackTitle">Find an issue in seconds.</h3><p data-i18n="trackBody">Enter a public ID to surface its latest status and history on the board.</p></div>
+        <form id="trackForm" class="track-form"><label class="sr-only" for="trackInput">Tracking ID</label><input id="trackInput" autocomplete="off" maxlength="12" placeholder="e.g. CP-2004" aria-describedby="trackResult"><button class="btn btn-primary" type="submit" data-i18n="trackButton">Track report</button></form>
+      </section>
+      <p id="trackResult" class="track-result" role="status" aria-live="polite" hidden></p>
+      <div class="score-legend"><span class="legend-icon" aria-hidden="true">↗</span><p><b data-i18n="priorityTitle">Why this priority?</b> <span data-i18n="priorityBody">Severity contributes 10–40 points. Each observed confirmation adds 3 points, up to 30. This is a visible queue aid, not an automated safety decision.</span></p></div>
+      <div class="reports-toolbar"><div><h3 id="feedTitle">Community issue board</h3><p id="feedDescription">Verify a report only when you have personally observed the issue.</p></div>
+        <div class="filters"><input id="searchInput" type="search" placeholder="Search ID, issue or area" aria-label="Search reports"><select id="categoryFilter" aria-label="Filter by category"><option value="all">All categories</option><option>Road / pothole</option><option>Garbage</option><option>Streetlight</option><option>Drainage</option><option>Water supply</option><option>Other</option></select><select id="statusFilter" aria-label="Filter by status"><option value="all">All statuses</option><option>Submitted</option><option>Verified</option><option>In Progress</option><option>Resolved</option></select></div>
+      </div>
+      <div id="reportsList" class="reports-grid" aria-live="polite"></div>
+      <p id="emptyState" class="empty-state" hidden>No reports match those filters. Try another search.</p>
+      <div class="data-note-wrap"><div class="data-note"><b data-i18n="transparencyTitle">Prototype transparency:</b> <span data-i18n="transparencyBody">This demo stores reports in this browser only. Sample records are illustrative, not verified municipal complaints.</span></div><button id="resetDemo" class="reset-btn" type="button" data-i18n="resetDemo">Reset local demo</button></div>
+    </section>
+
+    <section id="report" class="report-section">
+      <div class="report-intro"><span class="eyebrow">STEP 01 · REPORT</span><h2>Something needs fixing?</h2><p>Give the issue a clear title, choose its category and severity, and add a location. A precise location helps us group repeat reports.</p>
+        <div class="promise-list"><span>✓ Public tracking ID</span><span>✓ Community verification</span><span>✓ Visible status history</span></div>
+        <div class="safety-note"><b>Report responsibly</b><br>Do not include personal information, faces, vehicle number plates or emergency-sensitive details in descriptions or photos.</div>
+      </div>
+      <form id="reportForm" class="form-card">
+        <div class="form-heading"><span class="step-no">01</span><div><h3>Issue details</h3><p>Fields marked * are required.</p></div></div>
+        <label for="issueTitle">Issue title *</label><input id="issueTitle" maxlength="80" placeholder="e.g. Deep pothole near the market entrance" required>
+        <div class="form-row"><div><label for="issueCategory">Category *</label><select id="issueCategory" required><option value="">Choose category</option><option>Road / pothole</option><option>Garbage</option><option>Streetlight</option><option>Drainage</option><option>Water supply</option><option>Other</option></select></div><div><label for="issueSeverity">Severity *</label><select id="issueSeverity" required><option value="">Choose severity</option><option value="1">Low – inconvenience</option><option value="2" selected>Medium – recurring issue</option><option value="3">High – safety / access impact</option><option value="4">Critical – immediate public risk</option></select></div></div>
+        <label for="issueLocation">Area / landmark *</label><input id="issueLocation" maxlength="120" placeholder="e.g. Knowledge Park III, near Gate 2" required>
+        <div class="location-row"><button class="btn btn-soft" id="useLocation" type="button">◎ Add GPS coordinates</button><span id="gpsLabel" class="muted">Optional · permission required</span></div>
+        <input id="latitude" type="hidden"><input id="longitude" type="hidden">
+        <label for="issueDescription">What is happening? *</label><textarea id="issueDescription" rows="4" maxlength="500" placeholder="Describe the issue, how long it has been there and who may be affected…" required></textarea>
+        <label for="issuePhoto">Photo evidence <span class="optional">(optional, max 1 MB)</span></label><input id="issuePhoto" type="file" accept="image/*"><img id="photoPreview" class="photo-preview" alt="Selected issue photo preview" hidden>
+        <div class="form-actions"><button class="btn btn-primary" type="submit">Submit report <span>→</span></button><button class="btn btn-quiet" type="reset">Clear form</button></div>
+        <p id="formMessage" class="form-message" role="status"></p>
+      </form>
+    </section>
+
+    <section id="how" class="how-section"><span class="eyebrow" data-i18n="loopEyebrow">THE CIVICPULSE LOOP</span><h2 data-i18n="loopTitle">From a local problem to visible progress.</h2><div class="steps">
+      <article><span>1</span><h3>Report</h3><p>A resident submits an issue with category, severity and location.</p></article><article><span>2</span><h3>Group & verify</h3><p>Nearby matching reports are grouped and neighbours confirm what they have observed.</p></article><article><span>3</span><h3>Prioritize</h3><p>A transparent score combines declared severity and community confirmations.</p></article><article><span>4</span><h3>Track resolution</h3><p>The officer demo view updates the status and leaves a visible history.</p></article>
+    </div></section>
+    <footer><a class="brand" href="#home"><span class="brand-mark">CP</span><span><b>CivicPulse</b><small>REPORT · VERIFY · RESOLVE</small></span></a><p>Built by <b>Syntax Sorcerers</b> · Hackathon MVP</p><p class="footer-small">This is a demonstration prototype, not an official municipal service.</p></footer>
+  </main>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <script src="app.js"></script>
+</body>
+</html>
